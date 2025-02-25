@@ -1,4 +1,4 @@
-import { fetchPostById } from "@/actions/wp.action";
+import { fetchPostById, fetchPostsByCategories } from "@/actions/wp.action";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
@@ -7,6 +7,7 @@ import RelatedPost from "./RelatedPost";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const post = await fetchPostById(params.id);
+
   return {
     title: post?.title?.rendered,
     description: post?.excerpt?.rendered.replace(/<\/?[^>]+(>|$)/g, "").trim(),
@@ -14,6 +15,26 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }) {
+  const post = await fetchPostById(params.id);
+
+  // Fetch posts dynamically based on categories
+  const desiredCategories = ["Types of Influences", "Ways to Protect"];
+  const posts = await fetchPostsByCategories(desiredCategories);
+
+  if (!posts.length) return <div>No posts available</div>;
+
+  // Extract post IDs dynamically
+  const postIds = posts.map((p) => p.id);
+  const currentIndex = postIds.indexOf(Number(params.id));
+
+  // Ensure circular navigation
+  const nextIndex = (currentIndex + 1) % postIds.length;
+  const relatedPostId = postIds[nextIndex];
+
+  console.log("currentIndex", currentIndex);
+  console.log("nextIndex", nextIndex);
+  console.log("postIds", postIds);
+  console.log("relatedPostId", relatedPostId);
   return (
     <div className="min-h-screen bg-[#03000A] text-white p-4">
       <header className="flex items-center p-4 bg-[#03000A] ">
@@ -31,7 +52,7 @@ export default async function PostPage({ params }) {
         </Suspense>
 
         <Suspense fallback={<RelatedPostSkeleton />}>
-          <RelatedPost postId={params.id} />
+          <RelatedPost postId={relatedPostId} />
         </Suspense>
       </main>
     </div>

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 :root {
   --background: #03000a;
   --foreground: #ffffff;
@@ -14,6 +17,28 @@ body {
     "Helvetica Neue", sans-serif;
 }
 
+
+/* Add support for gradient text */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .bg-gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+.italic {
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Enhance gradient text rendering */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -25,6 +50,32 @@ body {
     background-position: 0% 50%;
   }
 }
+
+
+/* In your CSS file */
+.bg-gradient-text {
+  background: linear-gradient(90deg, #EEFF00, #00FF85, #00D1FF, #B32BF7, #FF2E92);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.2rem; /* text-lg */
+  font-weight: 500;    /* font-medium */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wide */
+  font-style: italic;
+  line-height: 1.75rem; /* leading-relaxed */
+
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
 
 /* Glass effect utilities */
 .backdrop-blur-xl {
@@ -79,20 +130,20 @@ body {
   background-size: 200% 200%;
 }
 
-@keyframes gradientMove {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-          .animate-gradientMove {
-            animation: gradientMove 8s ease-in-out infinite;
-          }
+/* @keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+.animate-gradientMove {
+  animation: gradientMove 8s ease-in-out infinite;
+}
 
 
 .custom-bg {
@@ -111,3 +162,42 @@ body {
   z-index: -1;
 }
 
+
+.custom-inverted-bg {
+  position: relative;
+  /* opacity: 1; */
+}
+
+.custom-inverted-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/bg-images/gradient-inverted.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1; /* Adjust opacity as needed */
+  /* z-index: 1; */
+}
+
+.home-gradient {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 10px; /* Adjust the radius as needed */
+  border-top-right-radius: 10px; /* Adjust the radius as needed */
+}
+
+.home-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%; /* Covers the bottom 25% of the div */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+}
+
+.bg-button-gradient {
+  background: linear-gradient(to right, rgb(96, 165, 250), rgb(103, 232, 249));
+}

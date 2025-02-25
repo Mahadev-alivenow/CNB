@@ -1,5 +1,5 @@
 import Link from "next/link"
-
+import { InstagramIcon, FacebookIcon } from "lucide-react";
 export function Footer() {
   return (
     <footer className="bg-[#03000A] text-white pb-8">
@@ -35,18 +35,19 @@ export function Footer() {
               © Copyright 2025. All Rights Reserved
             </p>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 text-gray-100">
+              Follow us
               <Link
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Facebook
+                <FacebookIcon />
               </Link>
               <Link
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Instagram
+                <InstagramIcon />
               </Link>
             </div>
           </div>

@@ -11,6 +11,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "primary-orange": "#FF8C00",
+        "secondary-orange": "#FFA500",
+        "lighter-orange": "#FFD700",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -104,8 +107,20 @@ module.exports = {
     },
     backgroundImage: {
       "custom-bg": "url('/bg-images/gradient-bg.jpeg')",
+      "custom-gradient": "linear-gradient(to right, #a855f7, #ec4899)",
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    function ({ addUtilities }) {
+      addUtilities({
+        ".bg-clip-text": {
+          "-webkit-background-clip": "text",
+          "background-clip": "text",
+        },
+      });
+    },
+  ],
 };
 

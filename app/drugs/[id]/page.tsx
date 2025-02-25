@@ -1,4 +1,4 @@
-import { fetchPostById } from "@/actions/wp.action";
+import { fetchPostById, fetchPostsByCategories } from "@/actions/wp.action";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
@@ -15,6 +15,30 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function DrugPostPage({ params }) {
+  const post = await fetchPostById(params.id);
+
+      const desiredCategories = [
+        "Anyone Can Be Vulnerable",
+        "Real Impact of Drugs",
+        "Drugs Facts",
+      ];   
+
+      const posts = await fetchPostsByCategories(desiredCategories);
+      
+        if (!posts.length) return <div>No posts available</div>;
+      
+        // Extract post IDs dynamically
+        const postIds = posts.map((p) => p.id);
+        const currentIndex = postIds.indexOf(Number(params.id));
+      
+        // Ensure circular navigation
+        const nextIndex = (currentIndex + 1) % postIds.length;
+        const relatedPostId = postIds[nextIndex];
+      
+        console.log("currentIndex", currentIndex);
+        console.log("nextIndex", nextIndex);
+        console.log("postIds", postIds);
+        console.log("relatedPostId", relatedPostId);
   return (
     <div className="min-h-screen bg-[#03000A] text-white p-4">
       <header className="flex items-center p-4 bg-[#03000A] ">
@@ -32,7 +56,7 @@ export default async function DrugPostPage({ params }) {
         </Suspense>
 
         <Suspense fallback={<RelatedPostSkeleton />}>
-          <DrugRelatedPost postId={params.id} />
+          <DrugRelatedPost postId={relatedPostId} />
         </Suspense>
       </main>
     </div>
