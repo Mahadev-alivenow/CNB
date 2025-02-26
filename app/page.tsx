@@ -24,7 +24,7 @@ function App() {
           <div className="min-h-screen">
             <div className="max-w-2xl mx-auto text-center pt-12">
               <p
-                className="bg-gradient-text font-bold md:text-4xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
+                className=" md:hidden visible bg-gradient-text font-bold md:text-4xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
                 style={{
                   position: scrollY > 100 ? "fixed" : "relative",
                 }}
@@ -55,6 +55,24 @@ function App() {
                 <br />
                 <br />
                 <span className="text-white text-3xl md:text-5xl font-bold">
+                  but is it really?
+                </span>
+              </p>
+              <p
+                className="invisible md:visible  bg-gradient-text font-bold md:text-4xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
+                style={{
+                  position: scrollY > 100 ? "fixed" : "relative",
+                }}
+              >
+                Think drugs are a
+                <br />
+                world away from
+                <br />
+                you? Their influence
+                <br />
+                is all around you.
+                <br />
+                <span className="text-white text-3xl md:text-5xl font-bold  md:invisible">
                   but is it really?
                 </span>
               </p>

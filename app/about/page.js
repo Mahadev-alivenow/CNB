@@ -19,7 +19,7 @@ export default function Page() {
                 className="w-full object-cover lg:w-auto lg:h-full"
               />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+            <h1 className="bg-gradient-text text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
               BE AWARE.
               <br />
               BE IN CONTROL.
@@ -35,9 +35,7 @@ export default function Page() {
       <div className="flex-1 flex flex-col custom-bg">
         {/* Main Content */}
         <div className="px-6 py-12 space-y-12 ">
-          <div
-            className="max-w-2xl mx-auto text-center text-2xl font-medium leading-none space-y-8 px-4 "
-          >
+          <div className="max-w-2xl mx-auto text-center text-2xl font-medium leading-none space-y-8 px-4 ">
             <p className="">This isn't about saying no for the sake of it.</p>
 
             <p className="">

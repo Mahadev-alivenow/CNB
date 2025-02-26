@@ -10,25 +10,25 @@ const events = [
   {
     id: 1,
     title: "The Trip: An Escape Room Experience",
-    image: "/placeholder.svg?height=200&width=400&text=Escape+Room",
+    image: "/events-images/event-1.png",
     upcoming: true,
   },
   {
     id: 2,
     title: "Event 1",
-    image: "/placeholder.svg?height=200&width=400&text=Event+1",
+    image: "/events-images/event-2.png",
     upcoming: true,
   },
   {
     id: 3,
     title: "Event 2",
-    image: "/placeholder.svg?height=200&width=400&text=Event+2",
+    image: "/events-images/event-3.png",
     upcoming: false,
   },
   {
     id: 4,
     title: "Event 3",
-    image: "/placeholder.svg?height=200&width=400&text=Event+3",
+    image: "/events-images/event-4.png",
     upcoming: false,
   },
 ]
@@ -42,9 +42,9 @@ export default function EventsPage() {
     <div className="min-h-screen bg-[#03000a] text-white">
       {/* Hero Section */}
       <div className="relative h-[50vh] flex items-center justify-center">
-        <div className="relative w-64 h-64">
+        {/* <div className="relative w-64 h-64">
           <Image
-            src="/placeholder.svg?height=256&width=256&text=Events"
+            src="//events-images/event-1.pngs"
             alt="Events"
             width={256}
             height={256}
@@ -53,12 +53,29 @@ export default function EventsPage() {
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-4xl font-bold text-[#EEFF00]">EVENTS</h1>
           </div>
+        </div> */}
+
+        <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center lg:h-[500px]">
+          <div className="flex justify-center items-center absolute">
+            <Image
+              src={"/events-images/events-bg.png"}
+              alt={"event bg image"}
+              width={400}
+              height={200}
+              className="w-full object-cover lg:w-auto lg:h-full"
+            />
+          </div>
+          <h1 className="bg-gradient-text text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+            EVENTS
+          </h1>
         </div>
       </div>
 
       {/* Events Section */}
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">Join us at our events</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Join us at our events
+        </h2>
 
         {/* Toggle Button */}
         <div className="flex justify-center mb-8">
@@ -66,7 +83,7 @@ export default function EventsPage() {
             <button
               className={cn(
                 "px-6 py-2 rounded-full transition-colors",
-                showUpcoming ? "bg-[#ff1e5e] text-white" : "text-[#b6b3bd]",
+                showUpcoming ? "bg-[#ff1e5e] text-white" : "text-[#b6b3bd]"
               )}
               onClick={() => setShowUpcoming(true)}
             >
@@ -75,7 +92,7 @@ export default function EventsPage() {
             <button
               className={cn(
                 "px-6 py-2 rounded-full transition-colors",
-                !showUpcoming ? "bg-[#ff1e5e] text-white" : "text-[#b6b3bd]",
+                !showUpcoming ? "bg-[#ff1e5e] text-white" : "text-[#b6b3bd]"
               )}
               onClick={() => setShowUpcoming(false)}
             >
@@ -87,9 +104,17 @@ export default function EventsPage() {
         {/* Events Grid */}
         <div className="grid gap-6">
           {filteredEvents.map((event) => (
-            <div key={event.id} className="bg-[#313144] rounded-lg overflow-hidden">
+            <div
+              key={event.id}
+              className="bg-[#313144] rounded-lg overflow-hidden"
+            >
               <div className="relative h-48">
-                <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
+                <Image
+                  src={event.image || "//events-images/event-1.png"}
+                  alt={event.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-4">
                 <h3 className="text-xl font-bold mb-2">{event.title}</h3>
@@ -105,6 +130,6 @@ export default function EventsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 

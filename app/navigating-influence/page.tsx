@@ -61,7 +61,7 @@ const filteredPosts =
               className="w-full object-cover lg:w-auto lg:h-full"
             />
           </div>
-          <h1 className="text-[2.75rem] leading-[2.75rem] md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+          <h1 className="bg-gradient-text text-[2.75rem] leading-[2.75rem] md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
             NAVIGATING INFLUENCE
           </h1>
         </div>
@@ -158,7 +158,7 @@ const filteredPosts =
       <div className="text-center mt-12">
         <Link
           href="/truth-about-drugs"
-          className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-[#ffffff] font-medium hover:opacity-90 transition-opacity"
+          className="bg-button-gradient inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-[#ffffff] font-medium hover:opacity-90 transition-opacity"
         >
           Discover more about drugs
         </Link>

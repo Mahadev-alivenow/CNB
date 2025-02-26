@@ -27,7 +27,7 @@ export default function HelpPage() {
                 className="w-full object-cover lg:w-auto lg:h-full"
               />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+            <h1 className="bg-gradient-text text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
               FIND
               <br />
               SUPPORT
@@ -102,7 +102,7 @@ export default function HelpPage() {
             </div>
           </div>
         </div>
-<hr />
+        <hr />
         {/* Organizations Grid */}
         <div className="relative max-w-4xl mx-auto py-12 px-4">
           {/* Background Gradient */}
