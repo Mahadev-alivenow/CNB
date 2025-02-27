@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export interface InfluenceItem {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
 export const influences = [
   {
     id: 1,
@@ -79,3 +84,43 @@ export const influences = [
     color: "#FF4D4D",
   },
 ];
+
+
+export const events = [
+  {
+    id: 1,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-1.png",
+    upcoming: true,
+  },
+  {
+    id: 2,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-2.png",
+    upcoming: true,
+  },
+  {
+    id: 3,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-3.png",
+    upcoming: false,
+  },
+  {
+    id: 4,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-4.png",
+    upcoming: false,
+  },
+  {
+    id: 5,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-1.png",
+    upcoming: true,
+  },
+  {
+    id: 6,
+    title: "The Trip: An Escape Room Experience",
+    image: "/events-images/event-2.png",
+    upcoming: false,
+  },
+]

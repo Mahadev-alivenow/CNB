@@ -27,6 +27,9 @@ export default function DragContent() {
     }
     dragX.set(0); // Reset drag position
   };
+  const handleDotClick = (index: number) => {
+    setContentIndex(index);
+  };
 
   return (
     <div className="">
@@ -59,7 +62,6 @@ export default function DragContent() {
                 height={180}
                 className="object-contain filter drop-shadow-[0_0px_20px_rgba(0,0,0,1)]"
               />
-              
             </div>
           ))}
         </motion.div>
@@ -127,6 +129,29 @@ export default function DragContent() {
             ))}
           </motion.div>
         </div>
+      </div>
+      {/* Dots Navigation */}
+      <div className="flex justify-center items-center mt-4 gap-2">
+        {influences.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className="focus:outline-none"
+            aria-label={`Go to slide ${index + 1}`}
+            initial={{ opacity: 0.6 }}
+            animate={{
+              opacity: contentIndex === index ? 1 : 0.6,
+              scale: contentIndex === index ? 1.2 : 1,
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            <div
+              className={`w-2 h-2 rounded-full ${
+                contentIndex === index ? "bg-white" : "bg-white/40"
+              }`}
+            />
+          </motion.button>
+        ))}
       </div>
     </div>
   );

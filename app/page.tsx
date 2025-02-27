@@ -59,7 +59,7 @@ function App() {
                 </span>
               </p>
               <p
-                className="invisible md:visible  bg-gradient-text font-bold md:text-4xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
+                className="invisible md:visible  bg-gradient-text font-bold md:text-5xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
                 style={{
                   position: scrollY > 100 ? "fixed" : "relative",
                 }}
@@ -85,7 +85,7 @@ function App() {
               <img
                 src="/home-elements/home-1.png"
                 alt="Gas mask icon"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "0%",
                   left: "0%",
@@ -95,7 +95,7 @@ function App() {
               <img
                 src="/home-elements/home-2.png"
                 alt="Marijuana leaf"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "25%",
                   right: "0%",
@@ -105,7 +105,7 @@ function App() {
               <img
                 src="/home-elements/home-3.png"
                 alt="Umbrella coin"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "40%",
                   left: "0%",
@@ -115,7 +115,7 @@ function App() {
               <img
                 src="/home-elements/home-4.png"
                 alt="Umbrella coin"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "55%",
                   right: "10%",
@@ -125,7 +125,7 @@ function App() {
               <img
                 src="/home-elements/home-5.png"
                 alt="Umbrella coin"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "70%",
                   left: "0%",
@@ -135,7 +135,7 @@ function App() {
               <img
                 src="/home-elements/home-6.png"
                 alt="Umbrella coin"
-                className="absolute w-48 h-48 object-cover"
+                className="absolute w-48 h-48 md:w-80 md:h-80 object-cover"
                 style={{
                   top: "90%",
                   right: "0%",

@@ -57,7 +57,7 @@ export function Footer() {
         </div>
 
         {/* Desktop footer (displays on medium screens and up) */}
-        <div className="hidden md:flex justify-between items-center py-7 px-6 lg:px-20">
+        <div className="hidden md:flex justify-between items-center py-7 px-4 ">
           <div className="flex flex-col">
             <span className="text-sm">BE</span>
             <span className="text-xl font-bold -mt-1">UNINFLUENCED</span>

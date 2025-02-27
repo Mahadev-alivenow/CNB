@@ -19,7 +19,7 @@ export default function Page() {
                 className="w-full object-cover lg:w-auto lg:h-full"
               />
             </div>
-            <h1 className="bg-gradient-text text-4xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+            <h1 className="bg-gradient-text text-3xl md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
               BE AWARE.
               <br />
               BE IN CONTROL.

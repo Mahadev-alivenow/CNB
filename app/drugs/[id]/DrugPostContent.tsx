@@ -17,33 +17,22 @@ export default async function DrugPostContent({ postId }) {
     currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 
   return (
-    <article className="max-w-3xl mx-auto">
-      <h1 className="text-4xl  mb-12">{post?.title.rendered}</h1>
-
-      {/* {post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-        <Image
-          src={
-            post?._embedded["wp:featuredmedia"][0].source_url ||
-            "/placeholder.svg"
-          }
-          alt={post?.title.rendered}
-          width={800}
-          height={400}
-          className="w-full h-auto mb-8 rounded-lg"
-        />
-      )} */}
+    <article className="max-w-3xl mx-auto lg:mx-0">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8 lg:mb-12 font-bold">
+        {post.title.rendered}
+      </h1>
 
       <div
-        className="prose prose-invert max-w-none"
+        className="prose prose-invert max-w-none prose-img:rounded-lg prose-headings:mt-8 prose-headings:mb-4 prose-p:text-base md:prose-p:text-lg"
         dangerouslySetInnerHTML={{ __html: post.content.rendered }}
       />
 
       {/* Pagination */}
-      <div className="flex justify-between mt-12">
+      <div className="flex justify-between mt-8 md:mt-10 lg:mt-12">
         {prevPost ? (
           <Link
             href={`/drugs/${prevPost.id}`}
-            className=" text-[#ffffff] py-2 opacity-50 underline"
+            className="text-[#ffffff] py-2 opacity-50 underline text-sm md:text-base"
           >
             Previous
           </Link>
@@ -54,7 +43,7 @@ export default async function DrugPostContent({ postId }) {
         {nextPost ? (
           <Link
             href={`/drugs/${nextPost.id}`}
-            className=" text-[#ffffff]  py-2 opacity-50 underline"
+            className="text-[#ffffff] py-2 opacity-50 underline text-sm md:text-base"
           >
             Next
           </Link>

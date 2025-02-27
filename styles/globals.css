@@ -144,8 +144,6 @@ body {
 .animate-gradientMove {
   animation: gradientMove 8s ease-in-out infinite;
 }
-
-
 .custom-bg {
   position: relative;
 }
@@ -160,6 +158,24 @@ body {
   background-repeat: no-repeat;
   opacity: 0.6; /* Adjust opacity as needed */
   z-index: -1;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .custom-bg::before {
+    background-image: url('/bg-images/gradient-bg.jpeg');
+  opacity: .4; /* Adjust opacity as needed */
+
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .custom-bg::before {
+    background-image: url('/bg-images/gradient-bg.jpeg');
+  opacity: .4; /* Adjust opacity as needed */
+
+  }
 }
 
 
