@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fetchPostById, fetchPostsByCategories } from "@/actions/wp.action";
+import { decodeHTML } from "@/lib/decode-html-server";
 
 export default async function DrugRelatedPost({ postId, relatedPostId }) {
   // const post = await fetchPostById(postId)
@@ -38,14 +39,14 @@ export default async function DrugRelatedPost({ postId, relatedPostId }) {
               "/placeholder.svg" ||
               "/placeholder.svg"
             }
-            alt={post.title?.rendered || "Related post"}
+            alt={decodeHTML(post.title?.rendered) || "Related post"}
             width={400}
             height={200}
             className="w-full h-40 md:h-48 object-cover rounded-lg"
           />
           <div className="pt-4 md:pt-6">
             <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-[#ffffff]">
-              {post.title?.rendered || "Related post"}
+              {decodeHTML(post.title?.rendered) || "Related post"}
             </h3>
             <div
               className="text-[#b6b3bd] mb-4 line-clamp-3 md:line-clamp-4 text-sm md:text-base"
@@ -81,19 +82,19 @@ export default async function DrugRelatedPost({ postId, relatedPostId }) {
                 relatedPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
                 "/placeholder.svg"
               }
-              alt={relatedPost.title?.rendered || "Related post"}
+              alt={decodeHTML(relatedPost.title?.rendered) || "Related post"}
               width={400}
               height={200}
               className="w-full h-40 md:h-48 object-cover rounded-lg"
             />
             <div className="pt-4 md:pt-6">
               <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-[#ffffff]">
-                {relatedPost.title?.rendered || "Related post"}
+                {decodeHTML(relatedPost.title?.rendered) || "Related post"}
               </h3>
               <div
                 className="text-[#b6b3bd] mb-4 line-clamp-3 md:line-clamp-4 text-sm md:text-base"
                 dangerouslySetInnerHTML={{
-                  __html: relatedPost.excerpt?.rendered || "",
+                  __html: decodeHTML(relatedPost.excerpt?.rendered) || "",
                 }}
               />
               <div className="flex justify-center items-center">

@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fetchPostById, fetchPostsByCategories } from "@/actions/wp.action";
+import { decodeHTML } from "@/lib/decode-html-server";
+
+// import { decodeHTML } from "./decode-html-server";
+
+
 
 export default async function PostContent({ postId }) {
-
-    const desiredCategories = ["Types of Influences", "Ways to Protect"];   
+  const desiredCategories = ["Types of Influences", "Ways to Protect"];
 
   const post = await fetchPostById(postId);
   const posts = await fetchPostsByCategories(desiredCategories);
@@ -19,12 +23,12 @@ export default async function PostContent({ postId }) {
   return (
     <article className="max-w-3xl mx-auto lg:mx-0">
       <h1 className="text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8 lg:mb-12 font-bold">
-        {post.title.rendered}
+        {decodeHTML(post.title.rendered)}
       </h1>
 
       <div
         className="prose prose-invert max-w-none prose-img:rounded-lg prose-headings:mt-8 prose-headings:mb-4 prose-p:text-base md:prose-p:text-lg"
-        dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+        dangerouslySetInnerHTML={{ __html: decodeHTML(post.content.rendered) }}
       />
 
       {/* Pagination */}

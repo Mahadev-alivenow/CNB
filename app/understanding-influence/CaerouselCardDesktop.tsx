@@ -14,7 +14,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ item }) => {
         <Image
           src={item.icon}
           alt={item.title}
-          className=" object-cover  translate-y-[60px] z-20 absolute drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)] filter brightness-110 "
+          className=" object-cover image-drop-shadow  translate-y-[60px] z-20 absolute  brightness-110 "
           //   style={{
           //     transform: "perspective(800px) rotateX(10deg)",
           //     animation: "float 6s ease-in-out infinite",

@@ -31,8 +31,44 @@ export default function DragContent() {
     setContentIndex(index);
   };
 
+
   return (
     <div className="">
+      <div className="w-full absolute  mx-auto left-0 ">
+        <div className="  flex justify-between  -translate-y-[120px]">
+          {contentIndex > 0 ? (
+            <Image
+              src={`/carousels/item${contentIndex}.png`}
+              alt={"carousels"}
+              width={80}
+              height={80}
+              className=" object-cover blur-sm opacity-80 "
+            />
+          ) : (
+            <div></div>
+          )}
+
+          {contentIndex < 8 ? (
+            <Image
+              src={`/carousels/item${contentIndex + 2}.png`}
+              alt={"carousels"}
+              width={80}
+              height={80}
+              className=" object-cover blur-sm opacity-80 "
+            />
+          ) : (
+            <div></div>
+          )}
+
+          {/* <Image
+            src={`/carousels/item${contentIndex + 2}.png`}
+            alt={"carousels"}
+            width={80}
+            height={80}
+            className=" object-cover blur-sm opacity-80"
+          /> */}
+        </div>
+      </div>
       <div className="w-full h-[300px] absolute overflow-hidden mx-auto left-0 bottom-80 z-30">
         <motion.div
           drag="x"
@@ -60,7 +96,7 @@ export default function DragContent() {
                 alt={influence.title}
                 width={180}
                 height={180}
-                className="object-contain filter drop-shadow-[0_0px_20px_rgba(0,0,0,1)]"
+                className="object-contain image-drop-shadow"
               />
             </div>
           ))}
