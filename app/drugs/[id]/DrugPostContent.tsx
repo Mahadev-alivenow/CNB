@@ -4,12 +4,15 @@ import { fetchPostById, fetchPostsByCategories } from "@/actions/wp.action";
 
 
 export default async function DrugPostContent({ postId }) {
-
-    const desiredCategories = ["Anyone Can Be Vulnerable","Real Impact of Drugs","Drugs Facts"];   
+  const desiredCategories = [
+    "Anyone Can Be Vulnerable",
+    "Real Impact of Drugs",
+    "Drugs Facts",
+  ];
 
   const post = await fetchPostById(postId);
   const posts = await fetchPostsByCategories(desiredCategories);
-  console.log(posts);
+  // console.log(posts);
 
   const currentIndex = posts.findIndex((p) => p.id === post.id);
   const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;

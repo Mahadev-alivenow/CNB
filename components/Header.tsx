@@ -4,23 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { MobileMenu } from "./MobileMenu";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Navigation links - replace with your actual links
   const navLinks = [
-    { href: "/", label: "" },
+    // { href: "/", label: "" },
     { href: "/understanding-influence", label: "Understanding Influence" },
     { href: "/navigating-influence", label: "Navigating Influence" },
     { href: "/truth-about-drugs", label: "Truth About Drugs" },
     { href: "/events", label: "Events" },
   ];
-
-
-
-
-
 
   return (
     <>
@@ -37,11 +36,18 @@ export function Header() {
 
             {/* Logo - centered on mobile, left-aligned on larger screens */}
             <Link href="/" className="text-xl font-bold text-white md:ml-0">
-              UNINFLUENCED
+              <div className=" p-8 flex justify-center items-center">
+                <h1 className="text-white font-bold text-2xl  uppercase tracking-wider space-x-1">
+                  <span className="inline-block transform skew-x-12">UN</span>
+                  <span className="inline-block transform -skew-x-12">
+                    INFLUENCED
+                  </span>
+                </h1>
+              </div>
             </Link>
 
             {/* Navigation for medium and desktop screens */}
-            <nav className="hidden md:flex items-center space-x-8">
+            {/* <nav className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -49,6 +55,31 @@ export function Header() {
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   {link.label}
+                </Link>
+              ))}
+            </nav> */}
+
+            <nav className="hidden md:flex space-x-8 overflow-hidden">
+              {navLinks.map((item) => (
+                <Link key={item.href} href={item.href} prefetch>
+                  <motion.div
+                    className={cn(
+                      "relative px-2 py-1",
+                      pathname === item.href
+                        ? "text-white"
+                        : "text-gray-400 hover:text-white"
+                    )}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.label}
+                    {pathname === item.href && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-0.5 w-full bg-white"
+                        layoutId="underline"
+                      />
+                    )}
+                  </motion.div>
                 </Link>
               ))}
             </nav>

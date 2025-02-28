@@ -60,7 +60,7 @@ const filteredPosts =
             className="w-full object-cover md:w-[500px] md:h-full"
           />
         </div>
-        <h1 className="bg-gradient-text text-[2.75rem] leading-[2.75rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+        <h1 className="bg-gradient-text text-[2.6rem] leading-[40px] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
           NAVIGATING
           <br />
           INFLUENCE
