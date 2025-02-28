@@ -48,7 +48,8 @@ const filteredPosts =
     : posts.filter((post) => post.categories === selectedCategory);
 
   return (
-    <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12">
+    <main>
+    {/* <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12"> */}
       {/* Hero Section */}
       <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]">
         <div className="flex justify-center items-center absolute">

@@ -13,7 +13,7 @@ import { getPosts } from "@/actions/wp.action";
 
 import { useEffect, useState, useCallback } from "react";
 
-export default function NavigatingInfluence() {
+export default function TruthAboutDrugs() {
   const [selectedCategory, setSelectedCategory] = useState("View all");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function NavigatingInfluence() {
         )
       : posts.filter((post) => post.categories === selectedCategory);
 
-  console.log("Filtered Posts", filteredPosts);
+  // console.log("Filtered Posts", filteredPosts);
 
   return (
     // <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12">

@@ -48,7 +48,7 @@ export default function DragContent() {
             <div></div>
           )}
 
-          {contentIndex < 8 ? (
+          {contentIndex < (influences.length - 1) ? (
             <Image
               src={`/carousels/item${contentIndex + 2}.png`}
               alt={"carousels"}
@@ -105,7 +105,7 @@ export default function DragContent() {
       <div className="relative z-20 flex flex-col bg-transparent border border-[#F8F9FA33] rounded-2xl w-full h-[300px] overflow-hidden">
         <div className="absolute inset-0 bg-white/5 backdrop-blur-xl bg " />
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
-        <div className="w-full h-[40%] relative overflow-hidden">
+        <div className="w-full h-[30%] relative overflow-hidden">
           <motion.div
             drag="x"
             dragConstraints={{
