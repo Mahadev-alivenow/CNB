@@ -11,7 +11,7 @@ export default function Page() {
         <div className="relative text-center mb-12 lg:mb-16">
           <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center lg:h-[500px]">
             {/* <div className="flex justify-center items-center absolute mx-auto"> */}
-            <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/about-drugs-bg.png')] bg-cover bg-center">
+            <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/about-bg.png')] bg-cover bg-center">
               {/* <Image
                 src={"/bg-images/about-bg.png"}
                 alt={"about bg image"}
