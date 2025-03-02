@@ -19,15 +19,16 @@ export default function EventsPage() {
     <main className="min-h-screen bg-[#03000A] text-white">
       {/* Hero Section */}
       <div className="relative w-full h-96 mx-auto flex justify-center items-center md:h-[400px] lg:h-[500px]">
-        <div className="absolute inset-0 flex justify-center items-center mx-auto">
-          <Image
+        {/* <div className="absolute inset-0 flex justify-center items-center mx-auto"> */}
+        <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/events-bg.png')] bg-cover bg-center">
+          {/* <Image
             src={"/events-images/events-bg.png"}
             alt={"event background"}
             width={600}
             height={600}
             className="w-full h-full object-cover md:object-contain"
             priority
-          />
+          /> */}
         </div>
         <h1 className="bg-gradient-text relative z-10 text-[2.75rem] leading-[2.75rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
           EVENTS
