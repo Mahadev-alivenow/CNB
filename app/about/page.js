@@ -10,7 +10,7 @@ export default function Page() {
 
         <div className="relative text-center mb-12 lg:mb-16">
           <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center lg:h-[500px]">
-            <div className="flex justify-center items-center absolute">
+            <div className="flex justify-center items-center absolute mx-auto">
               <Image
                 src={"/bg-images/about-bg.png"}
                 alt={"about bg image"}

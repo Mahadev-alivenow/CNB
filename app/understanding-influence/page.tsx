@@ -13,14 +13,13 @@ import Carousel from "./CarouselDesktop";
 export default function UnderstandingInfluence() {
   return (
     // <div className="min-h-screen z-10 bg-[#03000A] text-white custom-bg">
-    <div >
+    <div>
       {/* Main content */}
       <main>
-      {/* <main className=" container mx-auto px-4 py-2 lg:px-8 lg:py-12 "> */}
-
+        {/* <main className=" container mx-auto px-4 py-2 lg:px-8 lg:py-12 "> */}
 
         <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]">
-          <div className="flex justify-center items-center absolute">
+          <div className="flex justify-center items-center absolute mx-auto">
             <Image
               src={"/bg-images/understanding-influnce-bg.png"}
               alt={"truth-about-drugs bg image"}

@@ -19,7 +19,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-[#03000A] text-white">
       {/* Hero Section */}
       <div className="relative w-full h-96 mx-auto flex justify-center items-center md:h-[400px] lg:h-[500px]">
-        <div className="absolute inset-0 flex justify-center items-center">
+        <div className="absolute inset-0 flex justify-center items-center mx-auto">
           <Image
             src={"/events-images/events-bg.png"}
             alt={"event background"}
