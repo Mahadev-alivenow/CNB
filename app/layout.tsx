@@ -14,10 +14,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#03000A] text-white min-h-screen flex flex-col">
         <Header />
-        <main className="flex-grow custom-bg">{children}</main>
-        {/* <main className="flex-grow custom-bg">
+        {/* <main className="flex-grow custom-bg">{children}</main> */}
+        <main className="flex-grow custom-bg">
           <PageTransition>{children}</PageTransition>
-        </main> */}
+        </main>
         <Footer />
       </body>
     </html>

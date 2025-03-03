@@ -156,14 +156,15 @@ export default function TruthAboutDrugs() {
 
     <>
       <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]">
-        <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/truth-about-drugs-bg.png')] bg-cover bg-center">
-          {/* <Image
+        <div className="flex justify-center items-center absolute">
+          {/* <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/truth-about-drugs-bg.png')] bg-cover bg-center"> */}
+          <Image
             src={"/bg-images/truth-about-drugs-bg.png"}
             alt={"truth-about-drugs bg image"}
             width={400}
             height={200}
             className="w-full object-contain md:object-cover md:w-[500px] md:h-full"
-          /> */}
+          />
         </div>
         <h1 className="bg-gradient-text text-[2.6rem] leading-[2.6rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase text-center lg:text-6xl lg:leading-[4rem]">
           truth about
