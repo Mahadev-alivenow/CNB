@@ -27,6 +27,16 @@ body {
   }
 }
 
+.bg-tint{
+  /* inset: 0; */
+  background-image: url('/BG.png');
+  background-size: contain;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  opacity: 0.4; /* Adjust opacity as needed */
+  z-index: -1;
+
+}
 .italic {
   font-style: italic;
   letter-spacing: -0.01em;

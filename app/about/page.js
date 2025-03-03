@@ -30,6 +30,8 @@ export default function Page() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+      <div className="fixed top-0 bg-tint w-[120%] h-[120%]"></div>
+
       <main>
         <motion.div
           className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]"

@@ -11,10 +11,60 @@ import {
 import { ChevronDown, ArrowDown } from "lucide-react";
 import { getPosts } from "@/actions/wp.action";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function TruthAboutDrugs() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [triggerWidth, setTriggerWidth] = useState(0);
+  // const triggerRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update trigger width on mount and window resize
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setTriggerWidth(containerRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  // Animation variants
+  const dropdownVariants = {
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariantsDP = {
+    closed: {
+      y: -10,
+      opacity: 0,
+    },
+    open: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   const fadeIn = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.6 } },
@@ -102,110 +152,9 @@ export default function TruthAboutDrugs() {
   // console.log("Filtered Posts", filteredPosts);
 
   return (
-    // <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12">
-    //   {/* Hero Section */}
-    //   <div className="relative text-center mb-12 lg:mb-16">
-    //     <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center lg:h-[500px]">
-    //       <div className="flex justify-center items-center absolute">
-    //         <Image
-    //           src={"/bg-images/truth-about-drugs-bg.png"}
-    //           alt={"truth-about-drugs bg image"}
-    //           width={400}
-    //           height={200}
-    //           className="w-full object-cover lg:w-auto lg:h-full"
-    //         />
-    //       </div>
-    //       <h1 className="bg-gradient-text text-[2.75rem] leading-[2.75rem] md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
-    //         truth about drugs
-    //       </h1>
-    //     </div>
-    //     <div className="flex justify-center items-center pt-24">
-    //       <ArrowDown className="bounce" />
-    //     </div>
-    //   </div>
-    //   <div className="container mx-auto px-4 py-8 lg:px-0 lg:py-12">
-    //     <div className="relative text-center mb-12">
-    //       <p className="text-3xl font-bold mb-8 text-[#ebebee] lg:text-4xl">
-    //         Uncover the real truth about drugs
-    //       </p>
-
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger className="w-11/12 sm:w-1/6 bg-[#313144] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors inline-flex items-center justify-between lg:w-1/4">
-    //           {selectedCategory}
-    //           <ChevronDown className="ml-2 h-4 w-4" />
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent>
-    //           <DropdownMenuItem
-    //             onSelect={() => setSelectedCategory("View all")}
-    //           >
-    //             View all
-    //           </DropdownMenuItem>
-    //           <DropdownMenuItem
-    //             onSelect={() => setSelectedCategory("Anyone Can Be Vulnerable")}
-    //           >
-    //             Anyone Can Be Vulnerable
-    //           </DropdownMenuItem>
-    //           <DropdownMenuItem
-    //             onSelect={() => setSelectedCategory("Real Impact of Drugs")}
-    //           >
-    //             Real Impact of Drugs
-    //           </DropdownMenuItem>
-    //           <DropdownMenuItem
-    //             onSelect={() => setSelectedCategory("Drugs Facts")}
-    //           >
-    //             Drugs Facts
-    //           </DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     </div>
-    //   </div>
-
-    //   {/* Blog Posts */}
-    //   <div className="space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
-    //     {loading ? (
-    //       <div className="text-center text-white col-span-3">Loading...</div>
-    //     ) : (
-    //       filteredPosts.map((post) => (
-    //         <div
-    //           key={post.id}
-    //           className="bg-transparent border border-[#F8F9FA33] rounded-lg overflow-hidden p-6"
-    //         >
-    //           <Image
-    //             src={post?.featured_media_url || "/placeholder.svg"}
-    //             alt={post.title?.rendered || "Blog post"}
-    //             width={400}
-    //             height={200}
-    //             className="w-full h-48 object-cover rounded-lg"
-    //           />
-    //           <div className="pt-6">
-    //             <h2
-    //               className="text-xl font-bold mb-2 text-[#ffffff] lg:text-2xl"
-    //               dangerouslySetInnerHTML={{
-    //                 __html: post.title?.rendered || "",
-    //               }}
-    //             />
-    //             <div
-    //               className="text-[#b6b3bd] mb-4 line-clamp-4"
-    //               dangerouslySetInnerHTML={{
-    //                 __html: post.excerpt?.rendered || "",
-    //               }}
-    //             />
-    //             <div className="flex justify-center items-center">
-    //               <Link
-    //                 href={`/drugs/${post.id}`}
-    //                 className="inline-block bg-[#B6B3BD1A] text-white px-8 py-3 rounded-full border border-gray-500 shadow-inner-white hover:bg-[#B6B3BD33] transition-colors"
-    //               >
-    //                 Read more
-    //               </Link>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       ))
-    //     )}
-    //   </div>
-    // </main>
-
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+      <div className="fixed top-0 bg-tint w-[120%] h-[120%]"></div>
+
       <motion.div
         className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]"
         variants={slideUp}
@@ -272,7 +221,7 @@ export default function TruthAboutDrugs() {
             </motion.p>
           </motion.div>
 
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger className="w-9/12 sm:w-2/6 md:w-2/6 lg:3/6 bg-[#313144] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors inline-flex items-center justify-between">
               {selectedCategory}
               <ChevronDown className="ml-2 h-4 w-4" />
@@ -299,13 +248,109 @@ export default function TruthAboutDrugs() {
                 Drugs Facts
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
+
+          <motion.div
+            animate={{
+              marginBottom: isOpen ? "1.5rem" : "0rem",
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
+            className="relative flex justify-center items-center sm:w-2/6 md:w-2/6"
+          >
+            <DropdownMenu onOpenChange={setIsOpen}>
+              <motion.div
+                ref={containerRef}
+                animate={{
+                  backgroundColor: isOpen ? "#FFFFFF" : "#313144",
+                  color: isOpen ? "#313144" : "#FFFFFF",
+                }}
+                transition={{ duration: 0.3 }}
+                className="w-9/12 sm:w-2/6 md:w-2/6 lg:w-3/6 rounded-lg hover:bg-opacity-90 transition-colors"
+              >
+                <DropdownMenuTrigger className="flex w-full justify-between items-center px-6 py-3">
+                  <span>{selectedCategory}</span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </motion.div>
+                </DropdownMenuTrigger>
+              </motion.div>
+
+              <AnimatePresence>
+                {isOpen && (
+                  <DropdownMenuContent
+                    forceMount
+                    align="start"
+                    sideOffset={4}
+                    className="p-0 overflow-hidden bg-[#313144] border-none text-white"
+                    style={{ width: `${triggerWidth}px` }}
+                    asChild
+                  >
+                    <motion.div
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      variants={dropdownVariants}
+                    >
+                      <motion.div variants={itemVariants}>
+                        <DropdownMenuItem
+                          className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                          onSelect={() => {
+                            setSelectedCategory("View all");
+                            setIsOpen(false);
+                          }}
+                        >
+                          View all
+                        </DropdownMenuItem>
+                      </motion.div>
+
+                      <motion.div variants={itemVariants}>
+                        <DropdownMenuItem
+                          className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                          onSelect={() => {
+                            setSelectedCategory("Types of Influences");
+                            setIsOpen(false);
+                          }}
+                        >
+                          Types of Influences
+                        </DropdownMenuItem>
+                      </motion.div>
+
+                      <motion.div variants={itemVariants}>
+                        <DropdownMenuItem
+                          className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                          onSelect={() => {
+                            setSelectedCategory("Ways to Protect");
+                            setIsOpen(false);
+                          }}
+                        >
+                          Ways to Protect
+                        </DropdownMenuItem>
+                      </motion.div>
+                    </motion.div>
+                  </DropdownMenuContent>
+                )}
+              </AnimatePresence>
+            </DropdownMenu>
+          </motion.div>
         </motion.div>
       </motion.div>
 
       {/* Blog Posts */}
       <motion.div
-        className="container mx-auto px-4 py-8 lg:px-0"
+        animate={{
+          marginTop: isOpen ? "2.5rem" : "0rem",
+        }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+        className={`container mx-auto px-4 py-8 lg:px-0  `}
         variants={staggerContainer}
       >
         <AnimatePresence mode="wait">

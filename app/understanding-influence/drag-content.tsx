@@ -35,26 +35,28 @@ export default function DragContent() {
   return (
     <div className="">
       <div className="w-full absolute  mx-auto left-0 ">
-        <div className="  flex justify-between  -translate-y-[120px]">
+        <div className="  flex justify-between items-center  -translate-y-[120px]">
           {contentIndex > 0 ? (
             <Image
               src={`/carousels/item${contentIndex}.png`}
               alt={"carousels"}
-              width={80}
-              height={80}
-              className=" object-cover blur-sm opacity-80 "
+              width={70}
+              height={70}
+              className=" object-contain image-drop-shadow blur-sm opacity-80 "
+              priority
             />
           ) : (
             <div></div>
           )}
 
-          {contentIndex < (influences.length - 1) ? (
+          {contentIndex < influences.length - 1 ? (
             <Image
               src={`/carousels/item${contentIndex + 2}.png`}
               alt={"carousels"}
-              width={80}
-              height={80}
-              className=" object-cover blur-sm opacity-80 "
+              width={70}
+              height={70}
+              className=" object-contain image-drop-shadow blur-sm opacity-80 "
+              priority
             />
           ) : (
             <div></div>
@@ -97,6 +99,7 @@ export default function DragContent() {
                 width={180}
                 height={180}
                 className="object-contain image-drop-shadow"
+                priority
               />
             </div>
           ))}
@@ -155,7 +158,7 @@ export default function DragContent() {
                 className="w-full px-6 py-2 h-full shrink-0 flex flex-col justify-start"
                 key={influence.id}
               >
-                <h3 className="text-xl italic font-medium mb-2 text-left w-full">
+                <h3 className="text-xl italic font-bold mb-2 text-left w-full">
                   {influence.title}
                 </h3>
                 <p className="text-sm text-gray-300 leading-tight text-left overflow-y-auto">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstagramIcon, FacebookIcon } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -13,12 +14,21 @@ export function Footer() {
               <p className="text-xl font-bold">BE</p>
               {/* <p className="text-xl font-bold">UNINFLUENCED</p> */}
               <div className="flex justify-center items-center mt-0">
-                <h1 className="text-white font-bold text-xl  uppercase tracking-wider space-x-1">
+                <Image
+                  src={`/Logo.png`}
+                  alt={"UNINFLUENED image"}
+                  width={300}
+                  height={70}
+                  // fill
+                  className=" object-contain bg-transparent"
+                  priority
+                />
+                {/* <h1 className="text-white font-bold text-xl  uppercase tracking-wider space-x-1">
                   <span className="inline-block transform skew-x-12">UN</span>
                   <span className="inline-block transform -skew-x-12">
                     INFLUENCED
                   </span>
-                </h1>
+                </h1> */}
               </div>
               <p className="text-xs text-gray-400">
                 An initiative by the Central Narcotics Bureau
@@ -67,15 +77,24 @@ export function Footer() {
         {/* Desktop footer (displays on medium screens and up) */}
         <div className="hidden md:flex justify-between items-center py-7 px-4 ">
           <div className="flex flex-col">
-            <span className="text-xl font-bold">BE</span>
+            <span className="text-xl font-bold italic text-center">BE</span>
             {/* <span className="text-xl font-bold -mt-1">UNINFLUENCED</span> */}
             <div className="flex justify-center items-center">
-              <h1 className="text-white font-bold text-2xl  uppercase tracking-wider space-x-1">
+              <Image
+                src={`/Logo.png`}
+                alt={"UNINFLUENED image"}
+                width={300}
+                height={70}
+                // fill
+                className=" object-contain bg-transparent"
+                priority
+              />
+              {/* <h1 className="text-white font-bold text-2xl  uppercase tracking-wider space-x-1">
                 <span className="inline-block transform skew-x-12">UN</span>
                 <span className="inline-block transform -skew-x-12">
                   INFLUENCED
                 </span>
-              </h1>
+              </h1> */}
             </div>
           </div>
 

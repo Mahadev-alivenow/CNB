@@ -31,6 +31,8 @@ export default function HelpPage() {
 
   return (
     <>
+      <div className="fixed top-0 bg-tint w-[120%] h-[120%]"></div>
+
       <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12">
         {/* Hero Section */}
         <motion.div
@@ -84,7 +86,7 @@ export default function HelpPage() {
       </main>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8 custom-bg">
+      <div className="container mx-auto px-4 py-8 ">
         <motion.div
           ref={contentRef}
           initial={{ opacity: 0, y: 30 }}

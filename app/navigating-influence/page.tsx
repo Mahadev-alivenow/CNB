@@ -11,10 +11,60 @@ import {
 import { ChevronDown, ArrowDown } from "lucide-react";
 import {  getPosts } from "@/actions/wp.action";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function NavigatingInfluence() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [triggerWidth, setTriggerWidth] = useState(0);
+  // const triggerRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update trigger width on mount and window resize
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setTriggerWidth(containerRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  // Animation variants
+  const dropdownVariants = {
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariantsDP = {
+    closed: {
+      y: -10,
+      opacity: 0,
+    },
+    open: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   const fadeIn = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.6 } },
@@ -100,6 +150,8 @@ export default function NavigatingInfluence() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+      <div className="fixed top-0 bg-tint w-[120%] h-[120%]"></div>
+
       <main>
         {/* <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12"> */}
         {/* Hero Section */}
@@ -170,7 +222,7 @@ export default function NavigatingInfluence() {
               </motion.p>
             </motion.div>
 
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger className="w-9/12 sm:w-2/6 md:w-2/6 lg:3/6 bg-[#313144] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors inline-flex items-center justify-between">
                 {selectedCategory}
                 <ChevronDown className="ml-2 h-4 w-4" />
@@ -192,13 +244,111 @@ export default function NavigatingInfluence() {
                   Ways to Protect
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
+
+            <motion.div
+              animate={{
+                marginBottom: isOpen ? "1.5rem" : "0rem",
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+              className="relative flex justify-center items-center sm:w-2/6 md:w-2/6"
+            >
+              <DropdownMenu onOpenChange={setIsOpen}>
+                <motion.div
+                  ref={containerRef}
+                  animate={{
+                    backgroundColor: isOpen ? "#FFFFFF" : "#313144",
+                    color: isOpen ? "#313144" : "#FFFFFF",
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="w-9/12 sm:w-2/6 md:w-2/6 lg:w-3/6 rounded-lg hover:bg-opacity-90 transition-colors"
+                >
+                  <DropdownMenuTrigger className="flex w-full justify-between items-center px-6 py-3">
+                    <span>{selectedCategory}</span>
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                    </motion.div>
+                  </DropdownMenuTrigger>
+                </motion.div>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <DropdownMenuContent
+                      forceMount
+                      align="start"
+                      sideOffset={4}
+                      className="p-0 overflow-hidden bg-[#313144] border-none text-white"
+                      style={{ width: `${triggerWidth}px` }}
+                      asChild
+                    >
+                      <motion.div
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={dropdownVariants}
+                      >
+                        <motion.div variants={itemVariants}>
+                          <DropdownMenuItem
+                            className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                            onSelect={() => {
+                              setSelectedCategory("View all");
+                              setIsOpen(false);
+                            }}
+                          >
+                            View all
+                          </DropdownMenuItem>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants}>
+                          <DropdownMenuItem
+                            className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                            onSelect={() => {
+                              setSelectedCategory("Types of Influences");
+                              setIsOpen(false);
+                            }}
+                          >
+                            Types of Influences
+                          </DropdownMenuItem>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants}>
+                          <DropdownMenuItem
+                            className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                            onSelect={() => {
+                              setSelectedCategory("Ways to Protect");
+                              setIsOpen(false);
+                            }}
+                          >
+                            Ways to Protect
+                          </DropdownMenuItem>
+                        </motion.div>
+                      </motion.div>
+                    </DropdownMenuContent>
+                  )}
+                </AnimatePresence>
+              </DropdownMenu>
+            </motion.div>
+            {/* <div className={`${isOpen ? "mb-6" : "mb-0"} `}>
+            </div> */}
           </motion.div>
         </motion.div>
 
         {/* Blog Posts */}
         <motion.div
-          className="container mx-auto px-4 py-8 lg:px-0"
+          animate={{
+            marginTop: isOpen ? "2.5rem" : "0rem",
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+          className={`container mx-auto px-4 py-8 lg:px-0  `}
           variants={staggerContainer}
         >
           <AnimatePresence mode="wait">

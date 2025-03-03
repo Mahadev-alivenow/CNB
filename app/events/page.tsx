@@ -20,7 +20,9 @@ export default function EventsPage() {
   const isEventsInView = useInView(eventsRef, { once: true, amount: 0.1 });
 
   return (
-    <main className="min-h-screen bg-[#03000A] text-white">
+    <main className="min-h-screen  text-white">
+      <div className="fixed top-0 bg-tint w-[120%] h-[120%]"></div>
+
       {/* Hero Section */}
       <motion.div
         ref={heroRef}
@@ -38,9 +40,9 @@ export default function EventsPage() {
             <Image
               src={"/events-images/events-bg.png"}
               alt={"event background"}
-              width={600}
-              height={600}
-              className="w-full object-contain md:w-[500px] md:h-full mx-auto"
+              width={400}
+              height={200}
+              className="w-full object-cover md:w-[500px] md:h-full mx-auto"
               priority
             />
           </motion.div>
@@ -160,7 +162,6 @@ export default function EventsPage() {
                     <h3 className="text-xl font-bold text-white mb-2">
                       {event.title}
                     </h3>
-                    
                   </motion.div>
                 </div>
               </div>

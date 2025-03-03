@@ -7,6 +7,7 @@ import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,13 +37,22 @@ export function Header() {
 
             {/* Logo - centered on mobile, left-aligned on larger screens */}
             <Link href="/" className="text-xl font-bold text-white md:ml-0">
-              <div className=" p-8 flex justify-center items-center">
-                <h1 className="text-white font-bold text-[5.5vw] sm:text-lg  uppercase tracking-wider space-x-1">
+              <div className=" p-4 flex justify-center items-center">
+                <Image
+                  src={`/Logo.png`}
+                  alt={"UNINFLUENED image"}
+                  width={300}
+                  height={70}
+                  // fill
+                  className=" object-contain bg-transparent"
+                  priority
+                />
+                {/* <h1 className="text-white font-bold text-[5.5vw] sm:text-lg  uppercase tracking-wider space-x-1">
                   <span className="inline-block transform skew-x-12">UN</span>
                   <span className="inline-block transform -skew-x-12">
                     INFLUENCED
                   </span>
-                </h1>
+                </h1> */}
               </div>
             </Link>
 
