@@ -51,6 +51,24 @@ body {
   }
 }
 
+/* In your CSS file */
+.bg-gradient-text-home {
+  background: linear-gradient(90deg, #EEFF00, #00FF85, #00D1FF, #B32BF7, #FF2E92);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* font-size: 1.2rem; text-lg */
+  font-weight: 700;    /* font-medium */
+  text-transform: uppercase;
+  letter-spacing: 0.01em; /* tracking-wide */
+  font-style: italic;
+  /* line-height: 1.2rem;  */
+
+
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease-in-out infinite;
+}
+
 
 /* In your CSS file */
 .bg-gradient-text {

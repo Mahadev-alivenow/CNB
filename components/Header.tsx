@@ -37,7 +37,7 @@ export function Header() {
             {/* Logo - centered on mobile, left-aligned on larger screens */}
             <Link href="/" className="text-xl font-bold text-white md:ml-0">
               <div className=" p-8 flex justify-center items-center">
-                <h1 className="text-white font-bold text-2xl  uppercase tracking-wider space-x-1">
+                <h1 className="text-white font-bold text-[5.5vw] sm:text-lg  uppercase tracking-wider space-x-1">
                   <span className="inline-block transform skew-x-12">UN</span>
                   <span className="inline-block transform -skew-x-12">
                     INFLUENCED

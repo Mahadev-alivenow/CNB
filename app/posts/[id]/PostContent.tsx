@@ -5,8 +5,6 @@ import { decodeHTML } from "@/lib/decode-html-server";
 
 // import { decodeHTML } from "./decode-html-server";
 
-
-
 export default async function PostContent({ postId }) {
   const desiredCategories = ["Types of Influences", "Ways to Protect"];
 

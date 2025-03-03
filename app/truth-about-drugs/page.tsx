@@ -12,8 +12,59 @@ import { ChevronDown, ArrowDown } from "lucide-react";
 import { getPosts } from "@/actions/wp.action";
 
 import { useEffect, useState, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function TruthAboutDrugs() {
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6 } },
+  };
+
+  const slideUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const staggerChildren = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 },
+  };
+
+  const staggerContainer = {
+    animate: { transition: { staggerChildren: 0.1 } },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
   const [selectedCategory, setSelectedCategory] = useState("View all");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -154,8 +205,11 @@ export default function TruthAboutDrugs() {
     //   </div>
     // </main>
 
-    <>
-      <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]">
+    <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+      <motion.div
+        className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]"
+        variants={slideUp}
+      >
         <div className="flex justify-center items-center ">
           {/* <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/truth-about-drugs-bg.png')] bg-cover bg-center"> */}
           <Image
@@ -167,32 +221,56 @@ export default function TruthAboutDrugs() {
             priority
           />
         </div>
-        <h1 className="absolute z-10  bg-gradient-text text-[2.6rem] leading-[2.6rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase text-center lg:text-6xl lg:leading-[4rem]">
+        <motion.h1
+          className="absolute z-10  bg-gradient-text text-[2.6rem] leading-[2.6rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase text-center lg:text-6xl lg:leading-[4rem]"
+          variants={slideUp}
+        >
           truth about
           <br />
           drugs
-        </h1>
-      </div>
-      <div className="flex justify-center items-center pt-24 md:hidden">
+        </motion.h1>
+      </motion.div>
+      <motion.div
+        className="flex justify-center items-center pt-24 md:hidden"
+        variants={fadeInUp}
+      >
         <ArrowDown className="bounce" />
-      </div>
+      </motion.div>
 
-      <div className="container mx-auto px-4 py-8 lg:px-0 md:pb-12 md:pt-0">
-        <div className="relative text-center mb-12 md:flex md:justify-between md:items-center">
-          <p className="text-xl mb-8 text-[#ebebee] md:hidden">
+      <motion.div
+        className="container mx-auto px-4 py-8 lg:px-0 md:pb-12 md:pt-0"
+        variants={staggerChildren}
+      >
+        <motion.div
+          className="relative text-center mb-12 md:flex md:justify-between md:items-center"
+          variants={slideUp}
+        >
+          <motion.p
+            className="text-xl mb-8 text-[#ebebee] md:hidden"
+            variants={fadeInUp}
+          >
             Learn to resist negative influence with confidence
-          </p>
+          </motion.p>
 
-          <div className="relative md:flex md:flex-col hidden text-left md:w-2/3 md:pr-4">
-            <h2 className="text-3xl text-[#ebebee] md:text-2xl lg:text-3xl">
+          <motion.div
+            className="relative md:flex md:flex-col hidden text-left md:w-2/3 md:pr-4"
+            variants={slideUp}
+          >
+            <motion.h2
+              className="text-3xl text-[#ebebee] md:text-2xl lg:text-3xl"
+              variants={fadeInUp}
+            >
               You may see or hear about drugs differently, but one thing's for
               sure—they come with serious risks to your health and future.
-            </h2>
-            <p className="text-lg text-gray-400 md:text-base lg:text-lg">
+            </motion.h2>
+            <motion.p
+              className="text-lg text-gray-400 md:text-base lg:text-lg"
+              variants={fadeInUp}
+            >
               Uncover the real truths about drugs so you can make safer, more
               informed choices.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <DropdownMenu>
             <DropdownMenuTrigger className="w-9/12 sm:w-2/6 md:w-2/6 lg:3/6 bg-[#313144] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors inline-flex items-center justify-between">
@@ -222,55 +300,86 @@ export default function TruthAboutDrugs() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="container mx-auto px-4 py-8 lg:px-0">
-        <div className="space-y-8 md:grid md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4 lg:gap-8">
-          {loading ? (
-            <div className="text-center text-white col-span-full">
-              Loading...
-            </div>
-          ) : (
-            filteredPosts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-[#020009] border border-[#F8F9FA33] rounded-lg overflow-hidden p-6"
+      {/* Blog Posts */}
+      <motion.div
+        className="container mx-auto px-4 py-8 lg:px-0"
+        variants={staggerContainer}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="space-y-8 md:grid md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4 lg:gap-8"
+          >
+            {loading ? (
+              <motion.div
+                className="text-center text-white col-span-full"
+                variants={itemVariants}
               >
-                <Image
-                  src={post?.featured_media_url || "/placeholder.svg"}
-                  alt={post.title?.rendered || "Blog post"}
-                  width={400}
-                  height={200}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-                <div className="pt-6">
-                  <h2
-                    className="text-xl font-bold mb-2 text-[#ffffff] md:text-xl lg:text-2xl"
-                    dangerouslySetInnerHTML={{
-                      __html: post.title?.rendered || "",
-                    }}
+                Loading...
+              </motion.div>
+            ) : filteredPosts.length > 0 ? (
+              filteredPosts.map((post, index) => (
+                <motion.div
+                  key={post.id}
+                  className="bg-[#020009] border border-[#F8F9FA33] rounded-lg overflow-hidden p-6"
+                  variants={itemVariants}
+                  custom={index}
+                >
+                  <Image
+                    src={post?.featured_media_url || "/placeholder.svg"}
+                    alt={post.title?.rendered || "Blog post"}
+                    width={400}
+                    height={200}
+                    className="w-full h-48 object-cover rounded-lg"
                   />
-                  <div
-                    className="text-[#b6b3bd] mb-4 line-clamp-4"
-                    dangerouslySetInnerHTML={{
-                      __html: post.excerpt?.rendered || "",
-                    }}
-                  />
-                  <div className="flex justify-center items-center">
-                    <Link
-                      href={`/drugs/${post.id}`}
-                      className="inline-block bg-[#B6B3BD1A] text-white px-8 py-3 rounded-full border border-gray-500 shadow-inner-white hover:bg-[#B6B3BD33] transition-colors"
-                    >
-                      Read more
-                    </Link>
+                  <div className="pt-6">
+                    <h2
+                      className="text-xl font-bold mb-2 text-[#ffffff] md:text-xl lg:text-2xl"
+                      dangerouslySetInnerHTML={{
+                        __html: post.title?.rendered || "",
+                      }}
+                    />
+                    <div
+                      className="text-[#b6b3bd] mb-4 line-clamp-4"
+                      dangerouslySetInnerHTML={{
+                        __html: post.excerpt?.rendered || "",
+                      }}
+                    />
+
+                    <div className="flex justify-center items-center">
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Link
+                          href={`/drugs/${post.id}`}
+                          className="inline-block bg-[#B6B3BD1A] text-white px-8 py-3 rounded-full border border-gray-500 shadow-inner-white hover:bg-[#B6B3BD33] transition-colors"
+                        >
+                          Read more
+                        </Link>
+                      </motion.div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    </>
+                </motion.div>
+              ))
+            ) : (
+              <motion.div
+                variants={itemVariants}
+                className="text-center text-white col-span-full"
+              >
+                No posts found.
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
   );
 }
