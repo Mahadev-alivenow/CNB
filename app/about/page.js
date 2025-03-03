@@ -10,7 +10,7 @@ export default function Page() {
 
         <div className="relative text-center mb-12 lg:mb-16">
           <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center lg:h-[500px]">
-            <div className="flex justify-center items-center absolute mx-auto">
+            <div className="flex justify-center items-center  mx-auto">
               {/* <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/about-us-bg.png')] bg-cover bg-center"> */}
               <Image
                 src={"/bg-images/about-us-bg.png"}
@@ -21,7 +21,7 @@ export default function Page() {
                 priority
               />
             </div>
-            <h1 className="bg-gradient-text text-3xl  md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+            <h1 className="absolute z-10  bg-gradient-text text-3xl  md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
               BE AWARE.
               <br />
               BE IN CONTROL.
