@@ -25,7 +25,8 @@ export default function HelpPage() {
                 alt={"help bg image"}
                 width={400}
                 height={200}
-                className="w-full object-cover lg:w-auto lg:h-full"
+                className="w-full object-cover md:w-[500px] md:h-full mx-auto"
+                priority
               />
             </div>
             <h1 className="bg-gradient-text text-[2.4rem] leading-[2.75rem] md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">

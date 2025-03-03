@@ -26,7 +26,7 @@ export default function EventsPage() {
             alt={"event background"}
             width={600}
             height={600}
-            className="w-full h-full object-cover md:object-contain"
+            className="w-full object-cover md:w-[500px] md:h-full mx-auto"
             priority
           />
         </div>
