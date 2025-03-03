@@ -52,7 +52,7 @@ const filteredPosts =
       {/* <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12"> */}
       {/* Hero Section */}
       <div className="relative w-full h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px]">
-        <div className="flex justify-center items-center absolute">
+        <div className="flex justify-center items-center ">
           {/* <div className="absolute w-full md:w-1/2 h-96 mx-auto mb-8 flex justify-center items-center md:h-[400px] lg:h-[500px] bg-[url('/bg-images/navigating-influnce-bg.png')] bg-cover bg-center"> */}
           <Image
             src="/bg-images/navigating-influnce-bg.png"
@@ -63,7 +63,7 @@ const filteredPosts =
             priority
           />
         </div>
-        <h1 className="bg-gradient-text text-[2.6rem] leading-[40px] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
+        <h1 className="absolute z-10  bg-gradient-text text-[2.6rem] leading-[40px] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]">
           NAVIGATING
           <br />
           INFLUENCE
