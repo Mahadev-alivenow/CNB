@@ -6,6 +6,7 @@ import { ArrowDown, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { roboto700 } from "@/lib/fonts";
 
 const organizations = [
   { id: 1, name: "Organization 1", link: "#" },
@@ -62,7 +63,7 @@ export default function HelpPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute z-10 bg-gradient-text text-[2.4rem] leading-[2.75rem] md:text-5xl font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]"
+              className={`${roboto700.className} absolute z-10 bg-gradient-text text-center text-[2.4rem] leading-[2rem] md:text-5xl md:leading-[0.9em] lg:leading-[0.9em] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-tight uppercase lg:text-6xl `}
             >
               FIND
               <br />

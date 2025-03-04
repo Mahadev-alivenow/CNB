@@ -7,6 +7,7 @@ import DragContent from "./drag-content";
 import { influences } from "@/lib/utils";
 import Carousel from "./CarouselDesktop";
 import { motion } from "framer-motion";
+import { roboto700 } from "@/lib/fonts";
 
 export default function UnderstandingInfluence() {
   const fadeIn = {
@@ -49,7 +50,7 @@ export default function UnderstandingInfluence() {
             />
           </div>
           <motion.h1
-            className="absolute z-10 bg-gradient-text text-center text-[2.4rem] leading-[2.75rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase lg:text-6xl lg:leading-[4rem]"
+            className={`${roboto700.className} absolute z-10 bg-gradient-text text-center text-[2.4rem] leading-[2rem] md:text-5xl md:leading-[0.9em] lg:leading-[0.9em] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-tight uppercase lg:text-6xl `}
             variants={slideUp}
           >
             Understanding
@@ -68,10 +69,13 @@ export default function UnderstandingInfluence() {
         </motion.div>
 
         <motion.div
-          className="container mx-auto px-4 pb-8 lg:px-0 lg:pb-12"
+          className="container mx-auto px-4 pb-8 lg:px-0 lg:pb-4"
           variants={staggerChildren}
         >
-          <motion.div className="relative text-center mb-12" variants={slideUp}>
+          <motion.div
+            className="relative text-center mb-12 md:mb-0"
+            variants={slideUp}
+          >
             <motion.p
               className="text-[1.45rem] leading-[1.45rem] font-bold mb-8 text-[#ebebee] md:hidden"
               variants={fadeIn}
@@ -110,7 +114,10 @@ export default function UnderstandingInfluence() {
         </motion.div>
 
         {/* Desktop - Carousel Section */}
-        <motion.section className="mb-16 hidden md:block" variants={fadeIn}>
+        <motion.section
+          className="px-12 mb-16 hidden md:block"
+          variants={fadeIn}
+        >
           <Carousel items={influences} />
         </motion.section>
 

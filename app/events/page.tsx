@@ -5,6 +5,7 @@ import Image from "next/image";
 import { cn, events } from "@/lib/utils";
 import { ArrowDown } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { roboto700 } from "@/lib/fonts";
 
 export default function EventsPage() {
   const [showUpcoming, setShowUpcoming] = useState(true);
@@ -51,7 +52,7 @@ export default function EventsPage() {
           initial={{ y: 20, opacity: 0 }}
           animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bg-gradient-text  z-10 text-[2.75rem] leading-[2.75rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent tracking-wider uppercase lg:text-6xl lg:leading-[4rem]"
+          className={`${roboto700.className} absolute z-10 bg-gradient-text text-center text-[2.4rem] leading-[2rem] md:text-5xl md:leading-[0.9em] lg:leading-[0.9em] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-tight uppercase lg:text-6xl `}
         >
           EVENTS
         </motion.h1>

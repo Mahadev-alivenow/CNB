@@ -174,3 +174,123 @@ export async function fetchDrugPosts(): Promise<DrugPost[]> {
   }
 }
 
+// --------- search artcile ---------
+
+
+// Make sure getPosts includes _embed=true parameter
+export async function getAllPosts() {
+  try {
+    // Make sure we're including _embed=true in the API request
+    const response = await fetch(`${baseUrl}/wp/v2/posts?_embed=true&per_page=100`, {
+      next: { revalidate: 60 },
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch posts: ${response.status}`)
+    }
+
+    const posts = await response.json()
+
+    // Debug the first post to check if _embedded data is present
+    if (posts.length > 0) {
+      console.log(
+        `First post _embedded data:`,
+        posts[0]._embedded ? "Present" : "Missing",
+        posts[0]._embedded?.["wp:featuredmedia"] ? "Featured media present" : "No featured media",
+      )
+    }
+
+    return posts
+  } catch (error) {
+    console.error("Error fetching posts:", error)
+    return []
+  }
+}
+
+export async function directSearch(query: string) {
+  try {
+    // Use the original getPosts function
+    const posts = await getPosts()
+
+    console.log(`Fetched ${posts.length} posts for searching`)
+    console.log(`First post structure:`, posts.length > 0 ? Object.keys(posts[0]).join(", ") : "No posts")
+
+    // If first post has featured_media_url, log it
+    if (posts.length > 0 && posts[0].featured_media_url) {
+      console.log(`First post featured_media_url:`, posts[0].featured_media_url)
+    }
+
+    // If no query, return all posts
+    if (!query || !query.trim()) {
+      return posts
+    }
+
+    // Normalize the search query - split into words for better matching
+    const searchTerms = query.toLowerCase().trim().split(/\s+/)
+    console.log(`Search terms: ${JSON.stringify(searchTerms)}`)
+
+    // Filter posts by checking if ANY search term appears in title, content, or excerpt
+    const filteredPosts = posts.filter((post) => {
+      // Get text content and normalize it - handle both formatted and raw structures
+      const title = post.title?.rendered ? normalizeText(post.title.rendered) : ""
+
+      const content = post.content?.rendered ? normalizeText(post.content.rendered) : ""
+
+      const excerpt = post.excerpt?.rendered ? normalizeText(post.excerpt.rendered) : ""
+
+      // For debugging
+      console.log(`Post ID ${post.id} - Title: ${title.substring(0, 30)}...`)
+
+      // Check if ANY search term appears in ANY field
+      const matches = searchTerms.some((term) => {
+        const titleMatch = title.includes(term)
+        const contentMatch = content.includes(term)
+        const excerptMatch = excerpt.includes(term)
+
+        // Log matches for debugging
+        if (titleMatch || contentMatch || excerptMatch) {
+          console.log(`Match found for "${term}" in post ID ${post.id}`)
+          if (titleMatch)
+            console.log(
+              `- Title match: "${title.substring(
+                Math.max(0, title.indexOf(term) - 10),
+                Math.min(title.length, title.indexOf(term) + term.length + 10),
+              )}"`,
+            )
+          if (contentMatch) console.log(`- Content match`)
+          if (excerptMatch) console.log(`- Excerpt match`)
+        }
+
+        return titleMatch || contentMatch || excerptMatch
+      })
+
+      return matches
+    })
+
+    console.log(`Found ${filteredPosts.length} posts matching "${query}"`)
+    return filteredPosts
+  } catch (error) {
+    console.error("Error in direct search:", error)
+    return []
+  }
+}
+
+// Helper function to normalize text for searching
+function normalizeText(html: string): string {
+  // Remove HTML tags
+  const textOnly = html.replace(/<\/?[^>]+(>|$)/g, " ")
+
+  // Decode HTML entities
+  const decoded = textOnly
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&hellip;/g, "...")
+    .replace(/&nbsp;/g, " ")
+
+  // Normalize whitespace and convert to lowercase
+  return decoded.toLowerCase().replace(/\s+/g, " ").trim()
+}
+

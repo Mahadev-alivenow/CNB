@@ -2,16 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Menu, Instagram, Facebook } from "lucide-react";
 import Link from "next/link";
-import { Roboto } from "next/font/google";
+
 import { motion, AnimatePresence } from "framer-motion";
 import Head from "next/head";
-
-const roboto = Roboto({
-  weight: ["700"], // Specify the weights you intend to use
-  subsets: ["latin"], // Specify the subsets you intend to use
-  display: "swap", // Optional: Controls font-display behavior
-  style: ["normal", "italic"], // Include both normal and italic styles
-});
+import { Roboto } from "next/font/google";
+import { roboto700 } from "@/lib/fonts";
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
@@ -52,7 +47,7 @@ function App() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className={` ${roboto.className} italic md:hidden visible bg-gradient-text-home font-bold text-[5vw] leading-[5vw]  md:text-4xl  fixed left-0 -translate-x-1/2 top-20 w-full max-w-2xl px-4`}
+                    className={` ${roboto700.className} italic md:hidden visible bg-gradient-text-home font-bold text-[5vw] leading-[5vw]  md:text-4xl  fixed left-0 -translate-x-1/2 top-20 w-full max-w-2xl px-4`}
                     style={{
                       position: scrollY > 100 ? "fixed" : "relative",
                     }}
@@ -88,13 +83,14 @@ function App() {
                     <br />
                     <br />
                     <span
-                      className={`text-white text-[5vw] md:text-5xl font-bold ${roboto.className}`}
+                      className={`text-white text-[5vw] md:text-5xl font-bold ${roboto700.className}`}
                     >
                       but is it really?
                     </span>
                   </motion.p>
                   <p
-                    className="invisible md:visible  bg-gradient-text font-bold md:text-5xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4"
+                    className={` ${roboto700.className} italic invisible md:visible  bg-gradient-text font-bold md:text-5xl  leading-relaxed fixed left-1/2 -translate-x-1/2 top-20 w-full max-w-2xl px-4`}
+                    // className={` ${roboto700.className} italic md:visible invisible bg-gradient-text-home font-bold text-[5vw] leading-[5vw]  md:text-4xl  fixed left-0 -translate-x-1/2 top-20 w-full max-w-2xl px-4`}
                     style={{
                       position: scrollY > 100 ? "fixed" : "relative",
                     }}
@@ -217,7 +213,7 @@ function App() {
             >
               <div className=" py-1 px-4 md:p-16 text-center rounded-lg mx-4 my-8">
                 <div className="max-w-xl mx-auto">
-                  <p className="text-2xl md:text-2xl font-light leading-none mb-8 opacity-90">
+                  <p className="md:hidden text-2xl md:text-2xl font-light leading-none mb-8 opacity-90">
                     The world around
                     <br />
                     you shapes your thoughts,
@@ -228,12 +224,16 @@ function App() {
                     <br />
                     often without you realising it.
                   </p>
-                  <p className="text-sm mb-8 opacity-90">
+                  <p className="md:block hidden text-xl  font-medium leading-none mb-6 opacity-90">
+                    The world around you shapes your thoughts, choices, and even
+                    your views on drugs— often without you realising it.
+                  </p>
+                  <p className="text-base font-medium text-gray-500 mb-6 opacity-90">
                     Understand the influences that shape who you are.
                   </p>
                   <Link
                     href="/understanding-influence"
-                    className="bg-button-gradient relative inline-flex items-center justify-center px-8 py-3 text-sm font-thin  text-white transition-all rounded-full bg-gradient-to-r from-blue-400 to-cyan-300 border-2 border-white/20 backdrop-blur-sm hover:opacity-90"
+                    className="bg-button-gradient relative inline-flex items-center justify-center px-8 py-3 text-sm font-medium  text-white transition-all rounded-full bg-gradient-to-r from-blue-400 to-cyan-300 border-2 border-white/20 backdrop-blur-sm hover:opacity-90"
                   >
                     Learn more
                   </Link>

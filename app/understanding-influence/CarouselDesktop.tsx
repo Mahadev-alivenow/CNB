@@ -1,7 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+"use client";
+
+import type React from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import CarouselCard from "./CaerouselCardDesktop";
-import { InfluenceItem, influences } from "@/lib/utils";
+import type { InfluenceItem } from "@/lib/utils";
 
 interface CarouselProps {
   items: InfluenceItem[];
@@ -18,6 +22,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default to 5 items per page
   const [visibleItems, setVisibleItems] = useState<InfluenceItem[]>([]);
+  const [animationKey, setAnimationKey] = useState(0);
 
   // Create a circular array of items to ensure no empty space
   useEffect(() => {
@@ -77,6 +82,12 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       window.removeEventListener("resize", updateDimensions);
     };
   }, [isMobile, itemsPerPage]);
+
+  // Trigger re-animation when active index changes
+  useEffect(() => {
+    // Update animation key to force re-animation of elements
+    setAnimationKey((prev) => prev + 1);
+  }, []); // Removed activeIndex from dependencies
 
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
     setIsDragging(true);
@@ -148,16 +159,23 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
 
     return {
       transform: `translateX(${baseTransform + dragOffset + offset}px)`,
-      transition: isDragging ? "none" : "transform 0.5s ease-out",
+      transition: isDragging
+        ? "none"
+        : "transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
     };
   };
 
   return (
     <div className="relative overflow-hidden" ref={carouselRef}>
       {/* Navigation Arrows */}
-      <button
+      <motion.button
         onClick={goToPrev}
         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-r-lg transition-colors"
+        whileHover={{ scale: 1.1, x: 3 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
         aria-label="Previous slide"
       >
         <svg
@@ -173,11 +191,16 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
         >
           <path d="M15 18l-6-6 6-6" />
         </svg>
-      </button>
+      </motion.button>
 
-      <button
+      <motion.button
         onClick={goToNext}
         className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-l-lg transition-colors"
+        whileHover={{ scale: 1.1, x: -3 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
         aria-label="Next slide"
       >
         <svg
@@ -193,10 +216,10 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
         >
           <path d="M9 18l6-6-6-6" />
         </svg>
-      </button>
+      </motion.button>
 
       {/* Carousel Track */}
-      <div
+      <motion.div
         className="flex w-full"
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
@@ -206,33 +229,105 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
         style={getTransform()}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+          },
+        }}
       >
-        {visibleItems.map((item, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 px-1 md:px-2"
-            style={{ width: `${cardWidth}px` }}
-          >
-            <CarouselCard item={item} />
-          </div>
-        ))}
-      </div>
+        <AnimatePresence mode="wait">
+          {visibleItems.map((item, index) => (
+            <motion.div
+              key={index}
+              className="flex-shrink-0 px-1 md:px-2"
+              style={{ width: `${cardWidth}px` }}
+              initial={{
+                opacity: 0,
+                y: 50,
+                scale: 0.8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: {
+                  delay: (index * 0.08) % 0.8, // Limit the delay to avoid too long delays
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15,
+                },
+              }}
+              exit={{
+                opacity: 0,
+                y: -20,
+                transition: { duration: 0.3 },
+              }}
+              whileHover={{
+                y: -8,
+                scale: 1.03,
+                transition: { duration: 0.2 },
+              }}
+            >
+              <CarouselCard item={item} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
 
       {/* Pagination Indicators */}
-      <div className="flex justify-center mt-8 space-x-2">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex
-                ? "bg-white w-6"
-                : "bg-gray-500 hover:bg-gray-400"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      <motion.div
+        className="flex justify-center mt-8 space-x-2"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: 0.5,
+            staggerChildren: 0.05,
+            delayChildren: 0.6,
+          },
+        }}
+      >
+        <AnimatePresence>
+          {items.map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`h-2 rounded-full ${
+                index === activeIndex
+                  ? "bg-white"
+                  : "bg-gray-500 hover:bg-gray-400"
+              }`}
+              initial={{
+                width: index === activeIndex ? 24 : 8,
+                opacity: 0,
+                y: 10,
+              }}
+              animate={{
+                width: index === activeIndex ? 24 : 8,
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25,
+                  delay: index * 0.05,
+                },
+              }}
+              whileHover={{
+                scale: 1.2,
+                backgroundColor: index === activeIndex ? "#ffffff" : "#9ca3af",
+              }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 };

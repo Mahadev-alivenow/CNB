@@ -13,6 +13,7 @@ import { getPosts } from "@/actions/wp.action";
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { roboto700 } from "@/lib/fonts";
 
 export default function TruthAboutDrugs() {
   const [isOpen, setIsOpen] = useState(false);
@@ -171,7 +172,7 @@ export default function TruthAboutDrugs() {
           />
         </div>
         <motion.h1
-          className="absolute z-10  bg-gradient-text text-[2.6rem] leading-[2.6rem] md:text-5xl md:leading-[3.5rem] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-wider uppercase text-center lg:text-6xl lg:leading-[4rem]"
+          className={`${roboto700.className} absolute z-10 bg-gradient-text text-center text-[2.4rem] leading-[2rem] md:text-5xl md:leading-[0.9em] lg:leading-[0.9em] font-bold italic bg-gradient-to-r from-[#EEFF00] to-[#00FF85] bg-clip-text text-transparent mt-8 tracking-tight uppercase lg:text-6xl `}
           variants={slideUp}
         >
           truth about
@@ -398,13 +399,13 @@ export default function TruthAboutDrugs() {
                   />
                   <div className="pt-6">
                     <h2
-                      className="text-xl font-bold mb-2 text-[#ffffff] md:text-xl lg:text-2xl"
+                      className="text-xl font-normal mb-2 text-[#ffffff] md:text-xl lg:text-2xl"
                       dangerouslySetInnerHTML={{
                         __html: post.title?.rendered || "",
                       }}
                     />
                     <div
-                      className="text-[#b6b3bd] mb-4 line-clamp-4"
+                      className="text-[#b6b3bd] font-thin mb-4 line-clamp-4"
                       dangerouslySetInnerHTML={{
                         __html: post.excerpt?.rendered || "",
                       }}
