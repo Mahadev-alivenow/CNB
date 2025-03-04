@@ -313,11 +313,11 @@ export default function TruthAboutDrugs() {
                         <DropdownMenuItem
                           className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
                           onSelect={() => {
-                            setSelectedCategory("Types of Influences");
+                            setSelectedCategory("Anyone Can Be Vulnerable");
                             setIsOpen(false);
                           }}
                         >
-                          Types of Influences
+                          Anyone Can Be Vulnerable
                         </DropdownMenuItem>
                       </motion.div>
 
@@ -325,11 +325,23 @@ export default function TruthAboutDrugs() {
                         <DropdownMenuItem
                           className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
                           onSelect={() => {
-                            setSelectedCategory("Ways to Protect");
+                            setSelectedCategory("Real Impact of Drugs");
                             setIsOpen(false);
                           }}
                         >
-                          Ways to Protect
+                          Real Impact of Drugs
+                        </DropdownMenuItem>
+                      </motion.div>
+
+                      <motion.div variants={itemVariants}>
+                        <DropdownMenuItem
+                          className="px-6 py-3 cursor-pointer hover:bg-[#414156] transition-colors w-full text-white"
+                          onSelect={() => {
+                            setSelectedCategory("Drugs Facts");
+                            setIsOpen(false);
+                          }}
+                        >
+                          Drugs Facts
                         </DropdownMenuItem>
                       </motion.div>
                     </motion.div>
@@ -344,7 +356,7 @@ export default function TruthAboutDrugs() {
       {/* Blog Posts */}
       <motion.div
         animate={{
-          marginTop: isOpen ? "2.5rem" : "0rem",
+          marginTop: isOpen ? "4.5rem" : "0rem",
         }}
         transition={{
           duration: 0.3,
